@@ -1,19 +1,19 @@
 
-# Tree Traversal 
+// Tree Traversal 
 
 
-## Optimal
+// Optimal
 
-### Recursion
-```
+// Recursion
+
 class Solution {
   public int maxDepth(TreeNode root){
     if(node == null){return 0;}    
     return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
   }
 }
-```
-### Iteration
+
+// Iteration
 class Solution {
   public int maxDepth(TreeNode root){
    
@@ -23,13 +23,14 @@ class Solution {
 }
 
 
-## Improvement
+/* Improvement
 1. variable counter could just be passed in the return statement.
 2. Recursion can happens in just one function.
+*/
 
-## Original solution
+// Original solution
 
-```
+
 class Solution {
     
     public int maxDepth(TreeNode root) {
@@ -45,4 +46,4 @@ class Solution {
         return Math.max(traverse(node.left, counter), traverse(node.right, counter));   
     }
 }
-```
+
