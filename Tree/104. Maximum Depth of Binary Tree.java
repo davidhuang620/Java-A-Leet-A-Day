@@ -24,7 +24,9 @@ class Solution {
 /* Keys
 1. edge cases: when input root node is empty
 2. Stack <type> variable = new Stack <>();
-3. Stack <Integer>
+3. Stack <Integer> 
+4. Stack.push()
+5. Stack.pop()
 */
 
 class Solution {
@@ -63,22 +65,49 @@ class Solution {
 }
 
 
-// Original solution
 
+// Iteration BFS
+
+/* Keys
+1. Similar to DFS, but implement with Queue instead of Stack
+2. Queue <type> variable = new LinkedList<>();
+3. Queue.add //EnQueue
+4. Queue.poll // DeQueue
+5. For this problem, since we only care about the depth, we don't need another data structure for storing levels, 
+we can just increment it while scanning different levels.
+
+*/
 
 class Solution {
-    
-    public int maxDepth(TreeNode root) {
-    return traverse(root, 0);
+  public int maxDepth(TreeNode root){
+   
+    if(root == null){
+        return 0;        
     }
-    
-    public int traverse(TreeNode node, int counter){
-        if (node == null){ return counter;} 
-        counter ++;  
-        if(node.left == null && node.right == null){
-            return counter;
-        }   
-        return Math.max(traverse(node.left, counter), traverse(node.right, counter));   
-    }
-}
+      
+    Queue<TreeNode> nodeQueue = new LinkedList<>();
 
+    int maxDepth = 0;
+
+    nodeQueue.add(root);
+    
+    while(!nodeQueue.isEmpty()){
+        
+        int size = nodeQueue.size();
+        while(size-- >0){
+          TreeNode node = nodeQueue.poll();
+          if(node.right != null){
+            nodeQueue.add(node.right);
+          }
+
+          if(node.left != null){
+            nodeQueue.add(node.left);
+          }
+        }
+      maxDepth ++;
+       
+    }
+      
+    return maxDepth;
+  }
+}
