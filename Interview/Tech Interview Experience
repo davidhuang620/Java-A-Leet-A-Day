@@ -1,0 +1,21 @@
+
+Edge Cases - Empty input
+
+
+CRUD APP - Array 
+
+Add - O(1)
+Check if the item to add is a duplicate or not by using a hash table. Then add it in the hash table.
+
+Deletion - O(1) if we know where the element is
+Store the element as keys, and element index in array as values in the hash table. 
+So when we want to delete an element, we know the index of the element.
+Swap the last item with the element we want to delete, then pop the last item. (or decrease the array size by 1, lazy deletion)
+
+Random Access - O(1)
+Randomly generator a number in [0 , array.size), then use the random number as index to random access the array[random number].
+Hash table - O(n)
+
+Time 
+
+Not fast enough 
