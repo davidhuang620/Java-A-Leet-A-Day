@@ -1,15 +1,15 @@
 
-Edge Cases
+### Edge Cases
 
 Empty input
 
 
-Time 
+### Time 
 
 Not fast enough 
 
 
-CRUD APP - Array 
+### CRUD APP - Array 
 
 Add - O(1)
 Check if the item to add is a duplicate or not by using a hash table. Then add it in the hash table.
