@@ -3,7 +3,10 @@
 /* keys:
 
 Sliding Windows (two pointers)
-- in Substring problems: one pointer at the start of the substring, one at the end.
+- in Substring problems: 
+    One pointer at the start of the substring, one at the end. 
+    There's no discounity in the Substring, string between (i,j) is all we cared about.
+- when sliding the window of (i,j), we achieve O(n).
 
 
 HashMap <Character, Integer> tableName = new HashMap <Character, Integer>;
