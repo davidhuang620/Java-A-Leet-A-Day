@@ -1,12 +1,24 @@
 
+/*
+keys
+
+In Java, use s.empty instead of s == ""
+
+Always check pointers boundary EVERYTIME we manipulate them.
+
+When problem says ignore something, we need to confirm if we need to DEAL with them TO ignore them or just plainly ignore them. 
+
+*/
+
+
+
+
 class Solution {
     public boolean isPalindrome(String s) {
+        
         if ( s.isEmpty() || s == null) {
             return true;
         }
-        
-        // int l = s.length() / 2 - 1;
-        // int r = s.length() % 2 == 0 ? s.length()/2 : s.length()/2 + 1; 
         
         int l = 0;
         int r = s.length() - 1;
