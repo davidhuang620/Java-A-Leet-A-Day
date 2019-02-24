@@ -6,7 +6,7 @@ Draw graphs so we know the relationship of the 3 nodes we need to keep track of.
 
 */
 
-Iterative:
+// Iterative:
 
 class Solution {
     public ListNode reverseList(ListNode head) {
@@ -27,4 +27,14 @@ class Solution {
         
         return head;
     }
+}
+
+// Recursive:
+
+public ListNode reverseList(ListNode head) {
+    if (head == null || head.next == null) return head;
+    ListNode p = reverseList(head.next);
+    head.next.next = head;
+    head.next = null;
+    return p;
 }
