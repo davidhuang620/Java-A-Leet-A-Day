@@ -1,0 +1,13 @@
+
+遞歸三元素
+
+// 1. 遞歸的定義： input, return, definition
+public int fibonacci(int n){
+
+  // 3. 遞歸的出口 Base Case
+  if(n <= 1)
+  {return n;}
+  
+  // 2. 遞歸的拆解 
+  return fibonacci(n-1) + fibonacci(n-2);
+}
