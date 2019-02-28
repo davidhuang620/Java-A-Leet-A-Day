@@ -1,15 +1,48 @@
 /*
 
+
+Do I have to pass in nums, and target ? 
+Yes, because inner scope do not have access to variables from outer scope.
+Contrast to JavaScript where inner scope do have access to outer scope, and it is called closure.
+
 */
+
+// Recursion on the original function
+
+class Solution {
+    public int search(int[] nums, int target) {
+        
+        if(nums.length == 0) { return -1; }
+        
+        int midIndex = nums.length/2;
+        int mid = nums[midIndex];
+        
+        if(mid == target){
+            return midIndex;
+        }
+        
+        if(nums.length == 1) {
+            return -1;
+        }
+        
+        if(mid > target){
+            int [] arr = Arrays.copyOfRange(nums, 0, midIndex);
+            return search(arr, target);
+        }else{
+            int [] arr = Arrays.copyOfRange(nums, midIndex+1, nums.length);
+            return midIndex + search(arr, target);
+        }
+    }
+     
+}
 
 
 // Recursion on a separated function.
-
 class Solution {
     
     public int search(int[] nums, int target) {
         
-        // do I have to pass in nums, and target ?
+
         return binarySearch(nums, 0, nums.length-1, target);
     }
     
@@ -39,43 +72,30 @@ class Solution {
 }
 
 
-
-
-// Recursion on the original function
+// Iterative
 
 class Solution {
+    
     public int search(int[] nums, int target) {
         
-        if(nums.length == 0) { return -1; }
+        int start = 0;
+        int end = nums.length-1;
         
-        int midIndex = nums.length/2;
-        int mid = nums[midIndex];
-        
-        if(mid == target){
-            return midIndex;
+        while(start <= end){
+            
+            int mid = (start + end)/2;
+            
+            if (nums[mid] == target){
+                return mid;
+            }
+            if(nums[mid] < target){
+                start = mid + 1;
+            }else{
+                end = mid - 1;
+            }
         }
         
-        if(nums.length == 1) {
-            return -1;
-        }
-        
-        if(mid > target){
-            int [] arr = Arrays.copyOfRange(nums, 0, midIndex);
-            return search(arr, target);
-        }else{
-            int [] arr = Arrays.copyOfRange(nums, midIndex+1, nums.length);
-            return midIndex + search(arr, target);
-        }
+        return -1;
     }
-    
-    //helper 
-    // public int [] newArr(int [] nums, int left, int right){
-    //     int [] returnArr = new int[right - left - 1];
-    //     for(int i = 0; i < right-left+1; i++){
-    //         returnArr[i] = nums[left];
-    //         left ++;
-    //     }
-    //     return returnArr;
-    // }
-     
 }
+
