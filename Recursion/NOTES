@@ -11,3 +11,18 @@ public int fibonacci(int n){
   // 2. 遞歸的拆解 
   return fibonacci(n-1) + fibonacci(n-2);
 }
+
+
+
+尾遞歸
+Tail recursion
+
+More efficient
+
+The consequence of this is that once you are ready to perform your next recursive step, you don't need the current stack frame any more. 
+This allows for some optimization. 
+In fact, with an appropriately written compiler, you should never have a stack overflow snicker with a tail recursive call.
+
+https://stackoverflow.com/questions/33923/what-is-tail-recursion
+
+https://baike.baidu.com/item/%E5%B0%BE%E9%80%92%E5%BD%92
