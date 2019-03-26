@@ -34,9 +34,9 @@ class Solution {
             
         }
         
-        // KEY 4: check for left index and right index
+        // KEY 4: check for left index and right index, the ORDER MATTERS
         // Since we exit the while loop with exactly two indexes, we need to check both
-  
+        
         if (nums[left] == target){
             return left;
         }
