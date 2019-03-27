@@ -18,7 +18,7 @@ class Solution {
             }
         }
         
-        return A[low - 1] < A[low] && A[low + 1] < A[low] ? low : up;
+        return A[low] > A[up] ? low : up;
         
     }
 }
