@@ -1,5 +1,7 @@
 
     public void sortIntegers2(int[] A) {
+        
+        // return nothing since it is a void function
         if (A == null || A.length == 0){
             return;
         }
