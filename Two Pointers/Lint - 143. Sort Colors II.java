@@ -3,7 +3,9 @@
 Different than sort, we have k colors.
 We can achieve O( N LogK ) if we also do partition on colors, 
 which is faster than original quick sort O( N LogN )
-  
+
+careful that we need to use nums[low] <= colMid to put the same color on one side, 
+otherwise colors won't be sorted correctly, because the same color could be on both side of the divided array. 
 */
 
   public void sortColors2(int[] colors, int k) {
