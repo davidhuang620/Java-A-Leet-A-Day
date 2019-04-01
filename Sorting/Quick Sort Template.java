@@ -1,3 +1,6 @@
+// KEY 1 : pivot is the value, not the index
+// KEY 2 : left <= right    instead of left < right
+// KEY 3 : low < pivot      instead of low <= pivot 
 
     public void sortIntegers2(int[] A) {
         
