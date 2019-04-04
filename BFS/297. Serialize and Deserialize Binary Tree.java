@@ -20,31 +20,22 @@ public class Codec {
             return null;
         }
         
-        String ans = "[" + root.val;
-        ArrayList<TreeNode> queue = new ArrayList<>();
+        String ans = "[";
+        Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
-        int pt = 0;
         
-        while (pt < queue.size()){
+        while (!queue.isEmpty()){
             
-            TreeNode node = queue.get(pt);
-            if (node.left == null){
-                ans = ans + ",null";
-            } else {
-                ans = ans + "," + node.left.val;
+            TreeNode node = queue.poll();
+            if (node != null){
+                ans = ans + "," + node.val;
                 queue.add(node.left);
-            }
-            if (node.right == null){
-                ans = ans + ",null";
-            } else {
-                ans = ans + "," + node.right.val;
                 queue.add(node.right);
-            }
-            pt++;
+            } else{
+                ans = ans + ",null";
+            }    
         }
-        
         return ans + "]";
-        
     }
 
     // Decodes your encoded data to tree.
@@ -53,33 +44,31 @@ public class Codec {
         if (data == null || data == "[]"){
             return null;
         }
-        
-        String[] arr = data.substring(1, data.length() - 1).split(",");
-        ArrayList<TreeNode> queue = new ArrayList<>();
+     
+        // get the string between [, and ]
+        String[] arr = data.substring(2, data.length() - 1).split(",");
+        Queue<TreeNode> queue = new LinkedList<>();
         TreeNode root = new TreeNode(Integer.parseInt(arr[0]));
         queue.add(root);
-        boolean left = true;
-        int index = 0;
         
-        for(int i = 1; i < arr.length; i++){
+        int i = 1;
+        
+        while (i < arr.length){
+            
+            TreeNode node = queue.poll();
             
             // On string, use equals() instead == 
             if (!arr[i].equals("null")){
-                TreeNode node = new TreeNode(Integer.parseInt(arr[i]));
-                if (left){
-                    queue.get(index).left = node;
-                    queue.add(node);
-                } else {
-                    queue.get(index).right = node;
-                    queue.add(node);
-                }
+                node.left = new TreeNode(Integer.parseInt(arr[i]));
+                queue.add(node.left);
             }
-            // important
-            // Each node have two children we only index++ after the right node
-            if (!left){
-                index++;
+            i++;
+            if (i < arr.length && !arr[i].equals("null")){
+                node.right = new TreeNode(Integer.parseInt(arr[i]));
+                queue.add(node.right);
             }
-            left = !left;
+            i++;
+                
         }
         
         return root;
