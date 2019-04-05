@@ -18,7 +18,7 @@ class Solution {
             return 0;
         }
         
-        if (begin == end){ return 0;}
+        if (begin.equals(end)){ return 1;}
         
         Queue<String> queue = new LinkedList<>();
         queue.add(begin);
