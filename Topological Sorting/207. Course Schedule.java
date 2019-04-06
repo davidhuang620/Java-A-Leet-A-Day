@@ -3,6 +3,8 @@
         and Since each courses is labeled from 0 to n-1
         It will be efficient for us to use array to store the data
         
+        Ask if it has duplicate edges
+        
         slower && safer: 
         using the fixed size of the array, create a matrix of [numCourses] * [numCourses]
         
@@ -45,6 +47,10 @@ class Solution {
             int node = queue.poll();
             ansCount++;
             for (int i = 0; i < numCourses; i++){
+                 // do not support duplicate edges   
+                 // cuz we are looping only through i once
+                 // but duplicate edges will cause graph[node][i] >= 1
+                 // while indegree has counted for the total edges given including the duplicate ones 
                 if(graph[node][i] != 0){
                     degree[i]--;
                     if (degree[i] == 0){
@@ -71,10 +77,11 @@ class Solution {
 
 class Solution {
     public boolean canFinish(int numCourses, int[][] prereq) {
-        
-        if (prereq == null || prereq.length == 0 || prereq[0].length != 2){
-            return true;
-        }
+         
+        // There are edge cases where prereq is null and there's one class
+//         if (prereq == null || prereq.length == 0 || prereq[0].length != 2){
+//             return true;
+//         }
         
         /*
         Since each int represent an unique number
