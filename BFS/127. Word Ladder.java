@@ -7,7 +7,7 @@ For the strings we visited, we remove it from the wordList. This way we don't ne
 
 Actually, we don't even need to build the adjacency list graph explicitly using a HashMap<String, ArrayList>, since we keep all the nodes we can reach in the queue of each level of BFS. This can be seen as the keys of the HashMap are the strings that in the queue, and values are the strings that satisfy the 1 character apart in the wordList. Thus, we avoid the time cost of build map for those nodes we don't need to visit.
 
-
+Need to make sure if 'end' is in wordList, it makes a difference
 */
 
 
