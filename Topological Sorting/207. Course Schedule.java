@@ -5,6 +5,11 @@
         
         Ask if it has duplicate edges
         
+        BEST faster time & space, safer:
+        Use HashMap for graph   -> when we need an arraylist to keep track of every neighbor
+        Use int[] for indegree  -> when we know the index is from 0 to n-1 and we just need to store the indegree (int)
+        
+        
         slower && safer: 
         using the fixed size of the array, create a matrix of [numCourses] * [numCourses]
         
@@ -12,6 +17,77 @@
         instead of a 2d int matrix, use an ArrayList[] graph = new ArrayList[numCourses];
         but need to deal with (int) casting later 
         */
+
+
+
+// BEST VERSION
+
+class Solution {
+    public boolean canFinish(int numCourses, int[][] prereq) {
+        
+        // There are edge cases where prereq is null and there's one class
+        // if (prereq == null || prereq.length == 0 || prereq[0].length != 2){
+        //     return true;
+        // }
+
+        /*
+        Since each int represent an unique number
+        and Since each courses is labeled from 0 to n-1
+        It will be efficient for us to use array to store the data
+        */
+        
+        HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
+        int[] degree = new int[numCourses];
+        
+        
+        for (int[] pair : prereq){
+            // java array is initialized to 0            
+            // create graph
+            if (!map.containsKey(pair[1])){
+                map.put(pair[1], new ArrayList<>(Arrays.asList(pair[0])));
+            } else {
+                map.get(pair[1]).add(pair[0]);
+            }
+            
+            // create indegree 
+            degree[pair[0]]++;
+        }
+        
+
+        Queue<Integer> queue = new LinkedList<>();
+        for (int i = 0; i < degree.length; i++){
+            if (degree[i] == 0){
+                queue.add(i);
+            }
+        }
+        
+        int ansCount = 0;
+        while (!queue.isEmpty()){
+            int node = queue.poll();
+            ansCount++;
+            if (map.containsKey(node)){
+                for (int nber : map.get(node)){
+                    degree[nber]--;
+                    if (degree[nber] == 0){
+                    queue.add(nber);
+                }
+
+            }
+                      
+            }
+            
+        }
+        
+        return ansCount == numCourses;
+   
+    }
+    
+
+}
+
+
+
+// slower version
 
 class Solution {
     public boolean canFinish(int numCourses, int[][] prereq) {
