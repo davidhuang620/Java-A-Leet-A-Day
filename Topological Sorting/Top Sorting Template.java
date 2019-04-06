@@ -18,6 +18,7 @@ public class Solution {
         HashMap<DirectedGraphNode, Integer> map = new HashMap();
         for (DirectedGraphNode node : graph) {
             for (DirectedGraphNode neighbor : node.neighbors) {
+                // notice we are putting neighbors, not node
                 if (map.containsKey(neighbor)) {
                     map.put(neighbor, map.get(neighbor) + 1);
                 } else {
