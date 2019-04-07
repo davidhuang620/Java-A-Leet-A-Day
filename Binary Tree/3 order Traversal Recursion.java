@@ -1,0 +1,51 @@
+
+/*
+Pre Order
+Root Left Right 
+(pre => root at the start)
+首先访问根结点，然后遍历左子树，最后遍历右子树。遍历左、右子树时，仍按先序遍历。若二叉树为空则返回。
+该过程可简记为根左右，注意该过程是递归的。
+*/
+
+// 将根作为root，空ArrayList作为result传入，即可得到整棵树的遍历结果
+private void traverse(TreeNode root, ArrayList<Integer> result) {
+    if (root == null) {
+        return;
+    }
+    result.add(root.val);
+    traverse(root.left, result);
+    traverse(root.right, result);
+}
+
+/*
+In Order
+Left Root Right
+(In => Root in the middle)
+首先遍历左子树，然后访问根结点，最后遍历右子树。遍历左、右子树时，仍按中序遍历。若二叉树为空则返回。简记为左根右。
+*/
+
+private void traverse(TreeNode root, ArrayList<Integer> result) {
+    if (root == null) {
+        return;
+    }
+    traverse(root.left, result);
+    result.add(root.val);  // 注意访问根节点放到了遍历左子树的后面
+    traverse(root.right, result);
+}
+
+/*
+Post Order 
+Left Right Root 
+(Post => Root at the end)
+首先遍历左子树，然后遍历右子树，最后访问根结点。遍历左、右子树时，仍按后序遍历。若二叉树为空则返回。简记为左右根。
+*/
+
+private void traverse(TreeNode root, ArrayList<Integer> result) {
+    if (root == null) {
+        return;
+    }
+    traverse(root.left, result);
+    traverse(root.right, result);
+    result.add(root.val);  // 注意访问根节点放到了最后
+}
+
