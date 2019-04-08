@@ -55,3 +55,55 @@ class Solution {
     }
     
 }
+
+
+
+
+/*
+Follow UP
+*/
+
+public class Solution {
+    /**
+     * @param root: The root of binary tree.
+     * @return: True if this Binary tree is Balanced, or false.
+     */
+    class ResultType{
+        public int height;
+        public boolean isBal;
+        ResultType(int x, boolean isBal){
+            this.height = x;
+            this.isBal = isBal;
+        }
+    }
+     
+    public boolean isBalanced(TreeNode root) {
+        
+        ResultType result = isBal(root);
+        return result.isBal;
+    }
+    
+    private ResultType isBal(TreeNode root){
+        if (root == null){
+            return new ResultType(0, true);
+        }
+        
+        ResultType left = isBal(root.left);
+        ResultType right = isBal(root.right);
+        
+        if (!left.isBal || !right.isBal){
+            return new ResultType(-1, false);
+        }
+        
+        if (Math.abs(left.height - right.height) > 1){
+            return new ResultType(-1, false);
+        }
+        
+        ResultType result = new ResultType(Math.max(left.height, right.height) + 1, true);
+        
+        return result;
+        
+    }
+    
+}
+
