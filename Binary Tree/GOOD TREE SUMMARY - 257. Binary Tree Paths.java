@@ -99,3 +99,53 @@ class Solution {
         return res;
     }
 }
+
+/*
+ITERATIVE
+NEED a path stack
+
+*/
+
+class Solution {
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> ans = new ArrayList<>();
+        if (root == null){
+            return ans;
+        }
+        Stack<TreeNode> nodeStack = new Stack<>();
+        nodeStack.push(root);
+
+        // We need a path stack
+        // because every path at every node in the stack is different
+        // while adding the node to the node stack
+        // Also adding the correspond path to the path stack
+        // so we can get the correct path for each node when we pop the path stack
+        Stack<String> pathStack = new Stack<>();
+        String path = "";
+        pathStack.push(path);
+
+        while (!nodeStack.isEmpty()){
+            TreeNode node = nodeStack.pop();
+            path = pathStack.pop();
+            path = path + node.val + "->";
+            // leaf reached
+            if (node.left == null && node.right == null){
+                path = path.substring(0, path.length() - 2);
+                ans.add(path);   
+            }
+            
+            // while adding the node to the node stack
+            // Also adding the correspond path to the path stack
+            if (node.right != null){
+                nodeStack.add(node.right);
+                pathStack.add(path);
+            }
+            if (node.left != null){
+                nodeStack.add(node.left);
+                pathStack.add(path);
+            }
+            
+        }
+        return ans;
+    }
+}
