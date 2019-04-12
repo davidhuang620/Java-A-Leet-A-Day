@@ -44,6 +44,7 @@ class Solution {
             }
             // when we jump out of the loop, node == null
             node = stack.pop();
+            // Do whatever operation here
             ans.add(node.val);
             // search for the left most child on the right node again
             node = node.right;
