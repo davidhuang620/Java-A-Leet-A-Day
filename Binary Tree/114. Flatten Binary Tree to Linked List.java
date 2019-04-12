@@ -36,8 +36,7 @@ class Solution {
 // 合
 // 治
 
-// recursive
-// recursive
+
 class Solution {
     public void flatten(TreeNode root) {
         helper(root);
@@ -60,6 +59,7 @@ class Solution {
 
         if (rightLastNode != null){
             // if the old right subtree exist, its last node is the new last node
+            // THE ORDER MATTERS, first check rightLast then leftLast
             return rightLastNode;
         }
         
