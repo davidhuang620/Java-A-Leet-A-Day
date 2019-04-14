@@ -15,6 +15,7 @@ N = Null
 3 N  3 N  3 N  3 N
 
 we can see we have every combination
+ADD every subset at THE END of the recursion!
 
 [
   [1,2,3],
