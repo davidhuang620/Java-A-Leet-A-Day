@@ -1,4 +1,44 @@
 /*
+For every index, we add in every element after the index
+
+N = Null
+
+         
+    1       2   3
+  2   3   3   
+3       
+
+*/
+public class Solution {
+    /**
+     * @param nums: A set of numbers
+     * @return: A list of lists
+     */
+    public List<List<Integer>> subsets(int[] nums) {
+        
+        List<List<Integer>> ans = new ArrayList<>();
+        if (nums == null){
+            return ans;
+        }
+        Arrays.sort(nums);
+        comb(nums, 0, new ArrayList<Integer>(), ans);
+        return ans;
+    }
+    private void comb(int[] nums, int index,
+                        List<Integer> subset, List<List<Integer>> ans){
+        ans.add(new ArrayList<Integer>(subset));
+        for (int i = index; i < nums.length; i++){
+            subset.add(nums[i]);
+            comb(nums, i + 1, subset, ans);
+            subset.remove(subset.size() - 1);
+        }
+        
+    }
+}
+
+
+
+/*
 
 1 2 3
 Y Y Y
