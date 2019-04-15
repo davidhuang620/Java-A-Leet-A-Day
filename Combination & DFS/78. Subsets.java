@@ -1,4 +1,12 @@
-// THERE ARE 4 SOLUTIONS!!
+/* THERE ARE 4 SOLUTIONS!
+
+1. DFS general
+2. DEF decision tree
+3. BFS with queue
+4. BIT manipulation
+
+*/
+
 
 /*
 SOLUTION 1
