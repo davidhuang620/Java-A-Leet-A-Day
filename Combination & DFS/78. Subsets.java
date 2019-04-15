@@ -1,4 +1,8 @@
+// THERE ARE 4 SOLUTIONS!!
+
 /*
+SOLUTION 1
+
 For every index, we add in every element after the index
 
 N = Null
@@ -39,6 +43,8 @@ public class Solution {
 
 
 /*
+
+SOLUTION 2 
 
 1 2 3
 Y Y Y
@@ -109,6 +115,53 @@ class Solution {
         */
 
         return;
+    }
+    
+}
+
+
+/*
+
+Solution 3 
+
+BFS with QUEUE
+
+第一层: []
+第二层: [1] [2] [3]
+第三层: [1, 2] [1, 3], [2, 3]
+第四层: [1, 2, 3]
+
+*/
+
+
+class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        if (nums == null){
+            return ans;
+        }
+        if (nums.length == 0){
+            ans.add(new ArrayList<Integer>());
+            return ans;
+        }
+        Arrays.sort(nums);
+        Queue<ArrayList<Integer>> queue = new LinkedList<>();
+        queue.add(new ArrayList<Integer>());
+
+        
+        while (!queue.isEmpty()){
+            ArrayList<Integer> subset = queue.poll();
+            ans.add(subset);
+            for (int j = 0; j < nums.length; j++){
+                if (subset.size() == 0 || nums[j] > subset.get(subset.size() - 1)){
+                    ArrayList<Integer> next = new ArrayList<Integer>(subset);
+                    next.add(nums[j]);
+                    queue.add(next);
+                }
+            }
+            
+        }
+        return ans;
     }
     
 }
