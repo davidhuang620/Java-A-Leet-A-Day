@@ -1,104 +1,72 @@
-public class LRUCache {
-
-  class DLinkedNode {
-    int key;
-    int value;
-    DLinkedNode prev;
-    DLinkedNode next;
-  }
-
-  private void addNode(DLinkedNode node) {
-    /**
-     * Always add the new node right after head.
-     */
-    node.prev = head;
-    node.next = head.next;
-
-    head.next.prev = node;
-    head.next = node;
-  }
-
-  private void removeNode(DLinkedNode node){
-    /**
-     * Remove an existing node from the linked list.
-     */
-    DLinkedNode prev = node.prev;
-    DLinkedNode next = node.next;
-
-    prev.next = next;
-    next.prev = prev;
-  }
-
-  private void moveToHead(DLinkedNode node){
-    /**
-     * Move certain node in between to the head.
-     */
-    removeNode(node);
-    addNode(node);
-  }
-
-  private DLinkedNode popTail() {
-    /**
-     * Pop the current tail.
-     */
-    DLinkedNode res = tail.prev;
-    removeNode(res);
-    return res;
-  }
-
-  private Hashtable<Integer, DLinkedNode> cache =
-          new Hashtable<Integer, DLinkedNode>();
-  private int size;
-  private int capacity;
-  private DLinkedNode head, tail;
-
-  public LRUCache(int capacity) {
-    this.size = 0;
-    this.capacity = capacity;
-
-    head = new DLinkedNode();
-    // head.prev = null;
-
-    tail = new DLinkedNode();
-    // tail.next = null;
-
-    head.next = tail;
-    tail.prev = head;
-  }
-
-  public int get(int key) {
-    DLinkedNode node = cache.get(key);
-    if (node == null) return -1;
-
-    // move the accessed node to the head;
-    moveToHead(node);
-
-    return node.value;
-  }
-
-  public void put(int key, int value) {
-    DLinkedNode node = cache.get(key);
-
-    if(node == null) {
-      DLinkedNode newNode = new DLinkedNode();
-      newNode.key = key;
-      newNode.value = value;
-
-      cache.put(key, newNode);
-      addNode(newNode);
-
-      ++size;
-
-      if(size > capacity) {
-        // pop the tail
-        DLinkedNode tail = popTail();
-        cache.remove(tail.key);
-        --size;
-      }
-    } else {
-      // update the value.
-      node.value = value;
-      moveToHead(node);
+class LRUCache {
+    
+    class Node {
+        int key;
+        int value;
+        Node next;
+        Node prev;
+        Node (int key, int value){
+            this.key = key;
+            this.value = value;
+        }
     }
-  }
+    
+    Node root;
+    Node tail;
+    int cap;
+    int size = 0;
+    HashMap<Integer, Node> map = new HashMap<>();
+    
+    public LRUCache(int capacity) {
+        root = new Node(-1, -1);
+        tail = new Node(-2, -2);
+        root.next = tail;
+        tail.prev = root;
+        cap = capacity;
+    }
+    
+    public int get(int key) {
+        if (!map.containsKey(key)){
+            return -1;
+        }
+        Node node = map.get(key);
+        remove(node);
+        insertInFront(node);
+        return node.value;
+    }
+    
+    public void put(int key, int value) {
+        if (get(key) != -1){
+            map.get(key).value = value;
+            return;
+        }
+        Node node = new Node(key, value);
+        insertInFront(node);
+        size++;
+        
+        if (size > cap){
+            remove(tail.prev);
+            size--;
+        }
+    }
+    
+    private void insertInFront(Node node){
+        
+        node.next = root.next;
+        node.prev = root;
+        
+        root.next = node;
+        node.next.prev = node;
+        
+        map.put(node.key, node);
+    }
+    
+    private void remove(Node node){
+        
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
+        
+        map.remove(node.key);
+    }
+    
 }
