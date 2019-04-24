@@ -1,5 +1,9 @@
 /*
 
+Min Heap  =>  PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+
+Max Heap  =>  PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+
 Use 2 heap
 left Max heap and right Min heap 
 This way, we can keep track of the Median all time
