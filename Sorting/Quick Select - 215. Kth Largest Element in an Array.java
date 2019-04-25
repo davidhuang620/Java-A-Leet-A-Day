@@ -1,27 +1,28 @@
 class Solution {
     public int findKthLargest(int[] nums, int k) {
+        
         if (nums == null || nums.length == 0){
             return -1;
-        }   
-        return quickSelect(nums, 0, nums.length - 1, k);
-    }
-    
-    private int quickSelect(int[] nums, int start, int end, int k){
-        
-        if (start == end){
-            return nums[start];
         }
         
-        int pivot = nums[(start + end) / 2];
-        int low = start, up = end;
+        // Kth Largest = the (nums.length - k) index in the array 
+        k = nums.length - k;
+        quickSelect(nums, 0, nums.length - 1, k);
+        return nums[k];
+    }    
+    
+    private void quickSelect(int[] nums, int start, int end, int k){
         
-        // sort array from large to small
+        if (start >= end){
+            return;
+        }
         
+        int low = start, up = end, pivot = nums[(start + end) / 2];
         while (low <= up){
-            while (low <= up && nums[low] > pivot){
+            while (low <= up && nums[low] < pivot){
                 low++;
             }
-            while (low <= up && nums[up] < pivot){
+            while (low <= up && nums[up] > pivot){
                 up--;
             }
             if (low <= up){
@@ -32,18 +33,14 @@ class Solution {
                 up--;
             }
         }
-    
-        // Be Careful with the boundary here
         
-        if (up - start + 1 >= k){
-            return quickSelect(nums, start, up, k);
+        if (up >= k ){
+            quickSelect(nums, start, up, k);
         }
-        if (low - start + 1 <= k){
-            return quickSelect(nums, low, end, k - (low - start));
+        if (low <= k){
+            quickSelect(nums, low, end, k);
         }
         
-        return nums[up + 1];
-        
-    } 
+    }
     
 }
