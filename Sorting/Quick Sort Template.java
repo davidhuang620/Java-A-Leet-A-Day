@@ -1,6 +1,6 @@
 // KEY 1 : pivot is the value, not the index
 // KEY 2 : left <= right    instead of left < right
-// KEY 3 : low < pivot      instead of low <= pivot 
+// KEY 3 : nums[low] < pivot  nums[up] > pivot     instead of nums[low] <= pivot 
 
     public void sortIntegers2(int[] A) {
         
@@ -25,7 +25,7 @@
         // KEY 2 : low <= up    instead of left < right
         // so that low pointer and up pointer won't overlap, leave the pivot out of the next recursion
         
-        // KEY 3 : low < pivot      instead of low <= pivot 
+        // KEY 3 : nums[low] < pivot      instead of nums[low] <= pivot 
         // so that we won't skip the duplicates and make the whole array more even to avoid worst case
         
         while (low <= up){
