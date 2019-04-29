@@ -1,9 +1,11 @@
 /*
   Very tricky problem
   There are four situation need to consider 
-  first use targetAtLeft to decide which side the target is on
+  Create an boolean targetAtLeft to determine which side the target is on
+  
   Then use where mid and target are relatively at, decide to move left or right
   Better to draw out the example
+  
   Alternative way of doing this is using a binary search first to find the minimum index is at, 
   then search on the side the target is on
 */
