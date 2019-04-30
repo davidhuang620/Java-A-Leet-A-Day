@@ -24,20 +24,22 @@ String is not char
 
 class Solution {
     public int lengthOfLongestSubstring(String s) {
-        HashMap <Character, Integer> table = new HashMap <Character, Integer>();
-        int max = 0;
-        
-        for(int i = 0, j = 0; j < s.length(); j ++){
-            if (table.containsKey(s.charAt(j))){
-                i = Math.max(i, table.get(s.charAt(j))+1);
-            }
-            max = Math.max(max, j-i+1);
-            table.put(s.charAt(j),j);
-            
-            
+        if (s == null || s.length() == 0){
+            return 0;
         }
         
-        return max;
+        int max = 0;
+        HashMap<Character, Integer> map = new HashMap<>();
         
+        for (int low = 0, up = 0; up < s.length(); up++){
+            if (map.containsKey(s.charAt(up))){
+                // we may encounter old index that is behind low 
+                // To avoid low going back, we choose the higher index 
+                low = Math.max(low, map.get(s.charAt(up)) + 1);
+            }
+            map.put(s.charAt(up), up);
+            max = Math.max(max, up - low + 1);            
+        }
+        return max;
     }
 }
