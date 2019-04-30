@@ -10,6 +10,23 @@ Add every char in the indegree that has indegree == 0 into the queue
 Step 4:
 Perform Topological Sorting
 
+
+We can either build 
+
+HashMap<Character, HashSet<Character>> graph = new HashMap<>();
+or 
+HashMap<Character, ArrayList<Character>> graph = new HashMap<>();
+
+HashSet<>, we will need to check for not adding duplicates into the HashSet<Character>
+If we do no check, the indegree will increase and set won't change, it will have the wrong result
+
+ArrayList<>, we don't need to check for adding duplicates, 
+since when we adding duplicates into the arrayList, the indegree increase accordingly,
+In performing topological sorting, 
+for no matter how many duplciates, we will loop through all of them while indegree--, 
+and indegree will get to 0 eventually for us to add the element into the queue.
+The result will still be correct.
+
 */
 class Solution {
     public String alienOrder(String[] words) {
