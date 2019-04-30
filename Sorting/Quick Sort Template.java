@@ -1,3 +1,15 @@
+/*
+Time 
+Average: O(nlogn) 
+Worst: O(n^2)
+
+Space
+O(1)
+
+Consistency
+No, duplicate does not remains order
+
+*/
 // KEY 1 : pivot is the value, not the index
 // KEY 2 : left <= right    instead of left < right
 // KEY 3 : nums[low] < pivot  nums[up] > pivot     instead of nums[low] <= pivot 
