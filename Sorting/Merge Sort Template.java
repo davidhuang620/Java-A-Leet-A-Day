@@ -1,7 +1,19 @@
+/* 
+Time 
+Average: O(nlogn) 
+Worst: O(nlogn)
+
+Space
+O(n)
+
+Consistency
+Yes, duplicate remains order
+
+
 // Divide them into smaller and smaller pieces until left >= right
 // then Merge them together while sorting
 
-
+*/
 public void sortIntegers2(int[] A) {
         if (A == null || A.length == 0){
             return;
