@@ -34,3 +34,27 @@ class Solution {
         inorder(root.right);
     }
 }
+
+
+
+// Recursive
+
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        if (root == null) return true;
+        return helper(root, null, null);
+    }
+    
+    private boolean helper(TreeNode node, Integer min, Integer max){
+        
+        if (node == null) return true;
+        
+        if (!helper(node.left, min, node.val)) return false;
+        if (!helper(node.right, node.val, max)) return false;
+        
+        if (min != null && node.val <= min) return false;
+        if (max != null && node.val >= max) return false;
+        
+        return true;
+    }
+}
