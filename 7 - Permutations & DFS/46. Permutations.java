@@ -25,21 +25,27 @@ class Solution {
             return ans;
         }
         Arrays.sort(nums);
-        helper(nums, 0, new ArrayList<Integer>(), ans);
+        helper(nums, new boolean[nums.length], new ArrayList<Integer>(), ans);
         return ans;
     }
     
-    private void helper(int[] nums, int index, 
+    private void helper(int[] nums, boolean[] visited, 
                         List<Integer> perm, List<List<Integer>> ans){
+        
         if (perm.size() == nums.length){
-            ans.add(new ArrayList<Integer>(perm));
+            ans.add(new ArrayList<>(perm));
             return;
         }
         
-        for (int i = index; i < nums.length; i++){
-                perm.add(nums[i]);
-                helper(nums, i + 1, perm, ans);
-                perm.remove(perm.size() - 1);
+        for (int i = 0; i < nums.length; i++){
+            if (visited[i]){
+                continue;
+            }
+            visited[i] = true;
+            perm.add(nums[i]);
+            helper(nums, visited, perm, ans);
+            visited[i] = false;
+            perm.remove(perm.size() - 1);
         }
         
     }
