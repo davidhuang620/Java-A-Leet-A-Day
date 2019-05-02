@@ -3,15 +3,21 @@ The solution contains two steps
 1. Use BFS to construct a graph. 
 2. Use DFS to construct the paths from end to start.
 
+The reason we construct the path from end to start at the second step is because is faster,
+there may a lof way to expands path from start, but not all the path leads to end,
+if we start from end to start, than it is guarantee we only search on paths that leads from end to start.
+
 Think in this way:
 Since we don't know how the graph looks like, we first use BFS to construct the shortest "graph" to the endWord.
 Then use DFS to contruct all the path from the graph.
 
 The first step BFS is quite important. I summarized three tricks
 
-Using a MAP to store the min ladder of each word, or use a SET to store the words visited in current ladder, when the current ladder was completed, delete the visited words from unvisited. That's why I have two similar solutions.
+Using a MAP to store the min ladder of each word, or use a SET to store the words visited in current ladder, 
+when the current ladder was completed, delete the visited words from unvisited. That's why I have two similar solutions.
 
-Use Character iteration to find all possible paths. Do not compare one word to all the other words and check if they only differ by one character.
+Use Character iteration to find all possible paths. 
+Do not compare one word to all the other words and check if they only differ by one character.
 
 One word is allowed to be inserted into the queue only ONCE. See my comments.
 
@@ -45,6 +51,9 @@ class Solution {
             int qSize = queue.size();
             for (int i = 0; i < qSize; i++){
                 String str = queue.poll();
+                // The level thing is neccessary
+                // there might be other paths that connect to the target word that could be found 
+                // at the same level we found the target word
                 for (int j = 0; j < str.length(); j++){
                     char[] strArr = str.toCharArray();
                     for (char c = 'a'; c <= 'z'; c++){
