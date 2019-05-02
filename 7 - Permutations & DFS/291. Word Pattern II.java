@@ -20,7 +20,8 @@ This variant has two argument and tests if a string starts with the specified pr
 class Solution {
 
     public boolean wordPatternMatch(String pattern, String str) {
-        if (pattern == null || str == null){
+       // edge cases of "" and "" return true 
+       if (pattern == null || str == null){
             return false;
         }
         HashMap<Character, String> map = new HashMap<>();
@@ -51,7 +52,8 @@ class Solution {
             }
         }
         for (int i = sInd + 1; i <= str.length(); i++){
-            if (map.containsValue(str.substring(sInd, i))){
+           // make sure that no duplicate value stores in different keys 
+           if (map.containsValue(str.substring(sInd, i))){
                 continue;
             }
             map.put(p, str.substring(sInd, i));
