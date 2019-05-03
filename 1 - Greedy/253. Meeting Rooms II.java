@@ -4,6 +4,46 @@ Think of the process and orders of meetings and rooms.
 
 */
 
+// Very Greedy, abstract approach
+
+class Solution {
+    public int minMeetingRooms(int[][] intervals) {
+        if (intervals == null || intervals.length == 0 
+            || intervals[0].length == 0) return 0;
+        
+        int[] start = new int[intervals.length];
+        int[] end = new int[intervals.length];
+        
+        for (int i = 0; i < intervals.length; i++){
+            start[i] = intervals[i][0];
+            end[i] = intervals[i][1];
+        }
+        
+        Arrays.sort(start);
+        Arrays.sort(end);
+        
+        int rooms = 0, time = start[0], max = 0;
+        int sPt = 0, ePt = 0;
+        while (sPt < start.length){
+            time = start[sPt];
+            if (time < end[ePt]){
+                rooms++;
+                sPt++;
+            } else {
+                rooms--;
+                ePt++;
+            }
+            max = Math.max(max, rooms);
+        }
+        
+        return max;
+    }
+}
+
+
+
+// heap Approach
+
 class Solution {
     public int minMeetingRooms(int[][] intervals) {
         
