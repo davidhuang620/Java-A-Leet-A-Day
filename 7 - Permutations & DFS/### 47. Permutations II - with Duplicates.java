@@ -2,15 +2,25 @@
 
 Similiar problem with Permutation problem, but this time we have duplciates
 
-The Key is to check if the current nums[i] is a duplicate number as before, 
+The Key is to check if the current nums[i] is a duplicate number of the previous number, 
 (so we need to sort the array first)
-if it is, we only allow one kind of combination which is when the first one is use,
+
+If it is, we only allow one kind of combination 
+which is when the first one is use => visited[i - 1]
+
 All other cases (where the first one is not use)
 would be another duplicate permutation and should be denied.
 
-(i > 0 && nums[i] == nums[i-1] && !visited[i-1]){
+In other words =>  
+if the previouse number is not used and we are duplicates, we want to pass 
+(Because the duplicate permuations are already been taken of one and only one time when the first one is used)
+
+the previous one is not visited && we are duplicates 
+(i > 0 && !visited[i-1] && nums[i] == nums[i-1]){
   continue;
 }
+
+
 
 */
 class Solution {
