@@ -21,6 +21,15 @@ Do not compare one word to all the other words and check if they only differ by 
 
 One word is allowed to be inserted into the queue only ONCE. See my comments.
 
+Also, the visited set quite tricky, we remove visited from word Set at the end of each level.
+
+                            // we don't want to remove it from wordSet right now
+                            // since there may be other nodes pointing to this node AT THIS LEVEL
+                            // we add it into a visited set 
+                            // and remove it at the end of this level 
+                            // the if statement is Key, Avoid Duplicate queue insertion
+                            if (visited.add(nextStr)){
+
 */
 
 
@@ -66,7 +75,7 @@ class Solution {
                             } 
                             prevNodes.get(nextStr).add(str); 
                             // we don't want to remove it from wordSet right now
-                            // since there may be other nodes pointing to this node
+                            // since there may be other nodes pointing to this node AT THIS LEVEL
                             // we add it into a visited set 
                             // and remove it at the end of this level 
                             // the if statement is Key, Avoid Duplicate queue insertion
