@@ -20,12 +20,16 @@ class Solution {
     
     // k starts with 1 not 0, it's the kth smallest element
     private int findKth(int[] nums1, int ind1, int[] nums2, int ind2, int k){
+        // if one array has exhausted, search on the other array
+        // notice it is in the middle of the searching
+        // it is nums[ind + k - 1] instead of nums[k - 1]
         if (nums1 == null || ind1 >= nums1.length){
             return nums2[ind2 + k - 1];
         }
         if (nums2 == null || ind2 >= nums2.length){
             return nums1[ind1 + k - 1];
         }
+        // the next smallest element is now k
         if (k == 1){
             return nums1[ind1] < nums2[ind2] ? nums1[ind1] : nums2[ind2];
         }
