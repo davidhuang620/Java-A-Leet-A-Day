@@ -6,7 +6,7 @@
         since n is a 32-bit signed integer, within the range [−2 ^ 31, 2 ^ 31 − 1]
         we need a long varaible to hold it
         
-        Recursive solution is kinda tricky, gotta remeber 
+        Recursive solution is kinda tricky, gotta remember 
         
         */
 
